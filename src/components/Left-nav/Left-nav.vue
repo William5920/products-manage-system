@@ -6,7 +6,7 @@
 		</router-link>
 		<el-menu
 		  router
-	      :default-active="$route.path"
+	      :default-active="'/' + this.$route.path.split('/')[1]"
 	      class="el-menu-vertical-demo"
 	      @open="handleOpen"
 	      @close="handleClose"
@@ -91,7 +91,7 @@
   		}
   	},
   	created() {
-  		// console.log(menuList)
+  		console.log(this.$route.path.split('/')[1]) // 解决在深路径下left-nav不选中的bug
   	},
     methods: {
       handleOpen(key, keyPath) {

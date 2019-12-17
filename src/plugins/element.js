@@ -24,6 +24,8 @@ import {
   Select,
   Option,
   Divider,
+  Upload,
+  Cascader,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,3 +52,5 @@ Vue.use(Dialog);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Divider);
+Vue.use(Upload);
+Vue.use(Cascader);

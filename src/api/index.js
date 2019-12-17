@@ -45,8 +45,10 @@ export const reqProductsById = (productId) => ajax(BASE_URL + '/manage/product/i
 export const reqCategoryById = (categoryId) => ajax(BASE_URL + '/manage/category/info', {categoryId})
 // 更新产品上下架的状态
 export const reqUpdateStatus = (productId, status) => ajax(BASE_URL + '/manage/product/updateStatus', {productId, status}, 'POST')
-
-
+// 删除图片
+export const reqDeleteImg = (name) => ajax(BASE_URL + '/manage/img/delete', {name}, 'POST')
+// 添加或更新商品
+export const reqAddOrUpdateProduct = (product) => ajax(BASE_URL + '/manage/product/' + (product._id?'update':'add'), product, 'POST')
 
 
 

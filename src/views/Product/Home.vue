@@ -14,7 +14,7 @@
 		    <span>
 		    	<el-button type="primary" icon="el-icon-search" @click="getSearchProducts">搜索</el-button>
 		    </span>
-		    <el-button style="float: right; padding: 12px" type="primary" icon="el-icon-plus">添加商品</el-button>
+		    <el-button style="float: right; padding: 12px" type="primary" icon="el-icon-plus" @click="$router.push('/product/addUpdate')">添加商品</el-button>
 		  </div>
 		    <el-table
 			    :data="tableData"
@@ -60,7 +60,7 @@
 			      align="center">
 			      <template slot-scope="scope">
 			        <el-button @click="showDetail(scope.row)" type="text" size="small">详情</el-button>
-			        <el-button type="text" size="small">修改</el-button>
+			        <el-button type="text" size="small" @click="updateProduct(scope.row)">修改</el-button>
 			      </template>
 			    </el-table-column>
 			</el-table>
@@ -84,50 +84,7 @@
 			return {
 				searchType: 'productName',
 				searchKey: '',
-				tableData: [
-					{
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        }, 
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-			        {
-			          name: 'iPhone11',
-			          desc: '苹果旗舰机',
-			          price: 9999,
-			          status: '在售'
-			        },
-		        ],
+				tableData: [],
 		        pageNum: 1,
 		        pageSize: 3,
 		        total: 0, // 商品总数量
@@ -193,6 +150,10 @@
 	        showDetail(product) {
 	        	console.log(product._id)
 	        	this.$router.push('/product/detail/' + product._id)
+	        },
+	        // 跳转到修改商品的AddUpdate组件
+	        updateProduct(product) {
+	        	this.$router.push('/product/addUpdate/' + product._id)
 	        }
 
 		},
