@@ -26,6 +26,8 @@
 
 <script>
   import { reqLogin } from '../../api'
+  import memoryUtils from '../../utils/memoryUtils'
+  import storageUtils from '../../utils/storageUtils'
   export default {
     data() {
       return {
@@ -57,10 +59,10 @@
             // console.log(username, password)
             const result = await reqLogin(username, password)
             if (result.status === 0) {
-              this.$message({
-                message: '请求成功'
-              })
+              this.$message.success('登录成功！')
               this.$router.replace('/')
+              memoryUtils.user = result.data // 将用户数据保存到内存中去，方便其他组件使用
+              storageUtils.saveUser(result.data) // 将用户数据保存到localStirage中去，以维持登录状态
             } else {
               this.$message({
                 message: '登录失败：' + result.msg
@@ -73,6 +75,12 @@
           }
         });
       },
+    },
+    created() {
+    	const user = memoryUtils.user
+    	if(user && user._id) {
+    		this.$router.replace('/')
+    	}
     }
   }
 </script>

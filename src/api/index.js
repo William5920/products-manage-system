@@ -49,7 +49,20 @@ export const reqUpdateStatus = (productId, status) => ajax(BASE_URL + '/manage/p
 export const reqDeleteImg = (name) => ajax(BASE_URL + '/manage/img/delete', {name}, 'POST')
 // 添加或更新商品
 export const reqAddOrUpdateProduct = (product) => ajax(BASE_URL + '/manage/product/' + (product._id?'update':'add'), product, 'POST')
-
+// 获取角色列表
+export const reqRoleList = () => ajax(BASE_URL + '/manage/role/list')
+// 添加角色
+export const reqAddRole = (roleName) => ajax(BASE_URL + '/manage/role/add', {roleName}, 'POST')
+// 设置角色权限
+export const reqUpdateRole = (role) => ajax(BASE_URL + '/manage/role/update', role, 'POST')
+// 获取用户列表
+export const reqUsersList = () => ajax(BASE_URL + '/manage/user/list')
+// 删除用户
+export const reqDeleteUser = (userId) => ajax(BASE_URL + '/manage/user/delete',{userId}, 'POST' )
+// 添加用户
+export const reqAddUser = (user) => ajax(BASE_URL + '/manage/user/add', user, 'POST')
+// 更新用户
+export const reqUpdateUser = (user) => ajax(BASE_URL + '/manage/user/update', user, 'POST')
 
 
 

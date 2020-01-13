@@ -26,6 +26,7 @@ import {
   Divider,
   Upload,
   Cascader,
+  Tree,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -54,3 +55,4 @@ Vue.use(Option);
 Vue.use(Divider);
 Vue.use(Upload);
 Vue.use(Cascader);
+Vue.use(Tree);

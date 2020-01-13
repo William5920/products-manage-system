@@ -144,6 +144,7 @@
 	        },
 	        // 获取搜索商品数据
 	        getSearchProducts() {
+	        	this.pageNum = 1
 	        	this.getProducts(1, this.pageSize)
 	        },
 	        // 跳转商品详情页

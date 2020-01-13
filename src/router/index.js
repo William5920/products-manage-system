@@ -58,15 +58,15 @@ const routes = [
   			component: Role
   		},
   		{
-  			path: 'bar',
+  			path: 'charts/bar',
   			component: Bar
   		},
   		{
-  			path: 'line',
+  			path: 'charts/line',
   			component: Line
   		},
   		{
-  			path: 'pie',
+  			path: 'charts/pie',
   			component: Pie
   		},
   	]

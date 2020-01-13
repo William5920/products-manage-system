@@ -16,78 +16,39 @@
 		  
 		  <template v-for="(menu, index) in menuList" >
 
-		  	<el-menu-item :index="menu.key" v-if="!menu.children">
+		  	<el-menu-item :index="menu.key" v-if="!menu.children && hasAuthroity(menu)">
 		        <i :class="menu.icon"></i>
 		        <span slot="title">{{ menu.title }}</span>
 	      	</el-menu-item>
 
-	      	<el-submenu :index="menu.key" v-else>
+	      	<el-submenu :index="menu.key" v-else-if="menu.children && hasAuthroity(menu)">
 		        <template slot="title">
 		          <i :class="menu.icon"></i>
 		          <span>{{ menu.title }}</span>
 		        </template>
-
-		        <el-menu-item :index="item.key" v-for="(item, index) in menu.children" >
-			        <i :class="item.icon"></i>
-			        <span slot="title">{{ item.title }}</span>
-		      	</el-menu-item>
+		        <template v-for="(item, index) in menu.children">
+		        	<el-menu-item :index="item.key" v-if="hasAuthroity(item)">
+					        <i :class="item.icon"></i>
+					        <span slot="title">{{ item.title }}</span>
+				    </el-menu-item>
+		        </template>
+				
 	        </el-submenu>
 
 		  </template>
-	      <!-- <el-menu-item index="/home">
-	        <i class="el-icon-menu"></i>
-	        <span slot="title">首页</span>
-	      </el-menu-item>
-	      <el-submenu index="/category" >
-	        <template slot="title">
-	          <i class="el-icon-shopping-cart-2"></i>
-	          <span>商品</span>
-	        </template>
-	        <el-menu-item index="/category">
-	          <i class="el-icon-notebook-1"></i>
-	          <span>品类管理</span>
-	        </el-menu-item>
-	        <el-menu-item index="/product">
-	          <i class="el-icon-present"></i>
-	          <span>商品管理</span>
-	        </el-menu-item>
-	      </el-submenu>
-	      <el-menu-item index="/user">
-	        <i class="el-icon-user"></i>
-	        <span slot="title">用户管理</span>
-	      </el-menu-item>
-	      <el-menu-item index="/role">
-	        <i class="el-icon-s-check"></i>
-	        <span slot="title">角色管理</span>
-	      </el-menu-item>
-	      <el-submenu index="/bar" >
-	        <template slot="title">
-	          <i class="el-icon-picture-outline"></i>
-	          <span>图形图表</span>
-	        </template>
-	        <el-menu-item index="/bar">
-	          <i class="el-icon-data-analysis"></i>
-	          <span>柱形图</span>
-	        </el-menu-item>
-	        <el-menu-item index="/line">
-	          <i class="el-icon-data-line"></i>
-	          <span>折线图</span>
-	        </el-menu-item>
-	        <el-menu-item index="/pie">
-	          <i class="el-icon-pie-chart"></i>
-	          <span>饼图</span>
-	        </el-menu-item>
-	      </el-submenu> -->
+
 	    </el-menu>
 	</div>
 </template>
 
 <script>
   import menuList from '../../config/menuConfig'
+  import memoryUtils from '../../utils/memoryUtils'
   export default {
   	data() {
   		return {
-  			menuList
+  			menuList: menuList,
+  			userMenu: memoryUtils.user.role.menus
   		}
   	},
   	created() {
@@ -99,7 +60,33 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      hasAuthroity(menuItem) { // 判断用户是否具有该权限，此函数用于决定在渲染时是否渲染该菜单
+      	const {userMenu} = this
+      	const username = memoryUtils.user.username
+      	// 1.用户是admin
+      	// 2.menuItem的key在用户的menus中
+      	// 3.menuItem有children且children中其中之一的key在用户的menus中
+      	// 4.该menuItem是公开的
+      	if(username === 'admin') {
+      		return true
+      	} else if(userMenu.indexOf(menuItem.key) !== -1) {
+      		return true
+      	} else if(menuItem.children && !!menuItem.children.find(item => {
+      		return userMenu.indexOf(item.key) !== -1
+      	})) {
+      		return true
+      	} else if(menuItem.public === true) {
+      		return true
+      	}
+
+      	return false
       }
+    },
+    mounted() {
+    	console.log(this.userMenu)
+    	console.log(menuList)
+    	console.log(memoryUtils.user)
     }
   }
 </script>

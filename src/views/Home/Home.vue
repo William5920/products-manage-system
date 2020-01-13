@@ -3,8 +3,15 @@
 </template>
 
 <script>
+	import memoryUtils from '../../utils/memoryUtils'
 	export default {
-
+		created() {
+			const user = memoryUtils.user
+			if(!user || !user._id) {
+				this.$router.replace('/login')
+				this.$message.error('请登录！')
+			}
+		}
 	}
 </script>
 

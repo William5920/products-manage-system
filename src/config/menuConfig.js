@@ -41,17 +41,17 @@ const menuList = [
     children: [
       {
         title: '柱形图',
-        key: '/bar',
+        key: '/charts/bar',
         icon: 'el-icon-data-analysis'
       },
       {
         title: '折线图',
-        key: '/line',
+        key: '/charts/line',
         icon: 'el-icon-data-line'
       },
       {
         title: '饼图',
-        key: '/pie',
+        key: '/charts/pie',
         icon: 'el-icon-pie-chart'
       },
     ]

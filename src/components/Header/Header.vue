@@ -1,7 +1,7 @@
 <template>
 	<div class="header">
 		<div class="header-top">
-			<span>欢迎，admin</span>
+			<span>欢迎，{{ user.username }}</span>
 			<a href="javascript:" @click="logout">退出</a>
 		</div>
 		<div class="header-bottom">
@@ -19,6 +19,8 @@
 	import { dateFormate } from '../../utils/dateUtils'
 	import { reqWeather } from '../../api'
 	import menuConfig from '../../config/menuConfig'
+	import memoryUtils from '../../utils/memoryUtils'
+	import storageUtils from '../../utils/storageUtils'
 	export default {
 		data() {
 			return {
@@ -27,6 +29,7 @@
 				dayPicUrl: '', // 天气图片url
 				weatherText: '', // 天气文本
 				title: '', // 标题
+				user: memoryUtils.user // 用户信息
 			}
 		},
 		methods: {
@@ -65,7 +68,8 @@
 		        }).then(() => { // 确认退出
 		          // 1.清除用户数据
 		          
-		          // 待取得登录数据后完成
+		          storageUtils.deleteUser() // 删除localStorage中的数据
+		          memoryUtils.user = {} // 删除memoryUtils中的数据
 
 				  // 2.跳转到登录界面
 				  this.$router.replace('/login')

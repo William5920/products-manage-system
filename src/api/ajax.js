@@ -6,7 +6,9 @@
 优化2.直接返回响应的数据response.data而不是response
 */
 import axios from 'axios'
+import qs from 'qs'
 import { Message } from 'element-ui'
+
 
 export default function ajax (url, data = {}, type = 'GET') {
 	return new Promise((resolve, reject) => {
@@ -18,7 +20,15 @@ export default function ajax (url, data = {}, type = 'GET') {
 			})
 
 		} else {
-			promise = axios.post(url, data) // 发送post请求
+			// promise = axios.post(url, data) // 发送post请求
+			promise = axios({
+				url:url,
+				method: 'post',
+				data: qs.stringify(data),
+				headers:{
+					'Content-Type':'application/x-www-form-urlencoded'
+				}		
+			})
 		}
 		// 如果成功了调用resolve()
 		// 如果失败了不调用reject()，而是直接提示错误信息
