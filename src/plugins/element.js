@@ -27,6 +27,9 @@ import {
   Upload,
   Cascader,
   Tree,
+  DatePicker,
+  Timeline,
+  TimelineItem,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -56,3 +59,6 @@ Vue.use(Divider);
 Vue.use(Upload);
 Vue.use(Cascader);
 Vue.use(Tree);
+Vue.use(DatePicker);
+Vue.use(Timeline);
+Vue.use(TimelineItem);

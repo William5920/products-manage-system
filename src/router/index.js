@@ -12,6 +12,7 @@ import Role from '../views/Role/Role.vue'
 import Bar from '../views/Charts/Bar.vue'
 import Line from '../views/Charts/Line.vue'
 import Pie from '../views/Charts/Pie.vue'
+import NotFound from '../views/NotFound/NotFound.vue'
 
 
 Vue.use(VueRouter)
@@ -69,6 +70,10 @@ const routes = [
   			path: 'charts/pie',
   			component: Pie
   		},
+      {
+        path: '*',
+        component: NotFound
+      }
   	]
   },
   {

@@ -6,7 +6,7 @@
 		</router-link>
 		<el-menu
 		  router
-	      :default-active="'/' + this.$route.path.split('/')[1]"
+	      :default-active="defaultActive()"
 	      class="el-menu-vertical-demo"
 	      @open="handleOpen"
 	      @close="handleClose"
@@ -81,12 +81,22 @@
       	}
 
       	return false
+      },
+      defaultActive() {
+      	let val = this.$route.path.split('/')
+      	if(val[1] === 'charts') {
+      		return this.$route.path
+
+      	} else {
+      		console.log('/' + this.$route.path.split('/')[1])
+      		return '/' + this.$route.path.split('/')[1]
+      	}
       }
     },
     mounted() {
-    	console.log(this.userMenu)
-    	console.log(menuList)
-    	console.log(memoryUtils.user)
+    	// console.log(this.userMenu)
+    	// console.log(menuList)
+    	// console.log(memoryUtils.user)
     }
   }
 </script>
