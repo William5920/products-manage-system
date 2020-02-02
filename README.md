@@ -1,29 +1,10 @@
 # manage-system
 
-## Project setup
+## 项目描述
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+此项目为一个前后台分离的商品管理后台的spa，主要用于监控商品销售、库存等数据、操作商品状态、对后台用户的增删改及一系列行为进行管理，实现了用户管理、用户权限管理、商品管理、商品分类管理、销售数据可视化展示等功能
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 主要技术
+运用了vue和element-UI来构造后台界面，并且采用了webpack来对模块进行打包，通过axios来获取后台的数据，使用wangEditor来提升编辑商品信息的效率，使用Echarts完成数据的可视化，开发过程中多次使用ES6语法
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
