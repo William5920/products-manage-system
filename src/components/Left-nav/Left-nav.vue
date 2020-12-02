@@ -14,20 +14,20 @@
 	      text-color="#fff"
 	      active-text-color="#ffd04b">
 		  
-		  <template v-for="(menu, index) in menuList" >
+		  <template v-for="menu in menuList" >
 
-		  	<el-menu-item :index="menu.key" v-if="!menu.children && hasAuthroity(menu)">
+		  	<el-menu-item :key="menu.key" :index="menu.key" v-if="!menu.children && hasAuthroity(menu)">
 		        <i :class="menu.icon"></i>
 		        <span slot="title">{{ menu.title }}</span>
 	      	</el-menu-item>
 
-	      	<el-submenu :index="menu.key" v-else-if="menu.children && hasAuthroity(menu)">
+	      	<el-submenu :key="menu.key" :index="menu.key" v-else-if="menu.children && hasAuthroity(menu)">
 		        <template slot="title">
 		          <i :class="menu.icon"></i>
 		          <span>{{ menu.title }}</span>
 		        </template>
-		        <template v-for="(item, index) in menu.children">
-		        	<el-menu-item :index="item.key" v-if="hasAuthroity(item)">
+		        <template v-for="item in menu.children">
+		        	<el-menu-item :key="item.key" :index="item.key" v-if="hasAuthroity(item)">
 					        <i :class="item.icon"></i>
 					        <span slot="title">{{ item.title }}</span>
 				    </el-menu-item>
@@ -62,25 +62,26 @@
         console.log(key, keyPath);
       },
       hasAuthroity(menuItem) { // 判断用户是否具有该权限，此函数用于决定在渲染时是否渲染该菜单
-      	const {userMenu} = this
-      	const username = memoryUtils.user.username
+      	// const {userMenu} = this
+      	// const username = memoryUtils.user.username
       	// 1.用户是admin
       	// 2.menuItem的key在用户的menus中
       	// 3.menuItem有children且children中其中之一的key在用户的menus中
       	// 4.该menuItem是公开的
-      	if(username === 'admin') {
-      		return true
-      	} else if(userMenu.indexOf(menuItem.key) !== -1) {
-      		return true
-      	} else if(menuItem.children && !!menuItem.children.find(item => {
-      		return userMenu.indexOf(item.key) !== -1
-      	})) {
-      		return true
-      	} else if(menuItem.public === true) {
-      		return true
-      	}
+      	// if(username === 'admin') {
+      	// 	return true
+      	// } else if(userMenu.indexOf(menuItem.key) !== -1) {
+      	// 	return true
+      	// } else if(menuItem.children && !!menuItem.children.find(item => {
+      	// 	return userMenu.indexOf(item.key) !== -1
+      	// })) {
+      	// 	return true
+      	// } else if(menuItem.public === true) {
+      	// 	return true
+      	// }
 
-      	return false
+		  // return false
+		  return true
       },
       defaultActive() {
       	let val = this.$route.path.split('/')

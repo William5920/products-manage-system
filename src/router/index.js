@@ -18,68 +18,69 @@ import NotFound from '../views/NotFound/NotFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-  	path: '/',
-  	component: Admin,
-  	children: [
-  		{
-  			path: '',
-  			redirect: 'home'
-  		},
-  		{
-  			path: 'home',
-  			component: Home
-  		},
-  		{
-  			path: 'category',
-  			component: Category
-  		},
-  		{
-  			path: 'product',
-        component: ProductHome
-  		},
-      {
-        path: 'product/addupdate',
-        component: ProductAddUpdate
-      },
-      {
-        path: 'product/addupdate/:id',
-        component: ProductAddUpdate
-      },
-      {
-        path: 'product/detail/:id',
-        component: ProductDetail,
-      },
-  		{
-  			path: 'user',
-  			component: User
-  		},
-  		{
-  			path: 'role',
-  			component: Role
-  		},
-  		{
-  			path: 'charts/bar',
-  			component: Bar
-  		},
-  		{
-  			path: 'charts/line',
-  			component: Line
-  		},
-  		{
-  			path: 'charts/pie',
-  			component: Pie
-  		},
-      {
-        path: '*',
-        component: NotFound
-      }
-  	]
-  },
-  {
-    path: '/login',
-    component: Login
-  },
+	{
+		path: '/login',
+		component: Login
+	  },
+	{
+		path: '/',
+		component: Admin,
+		children: [
+			{
+				path: '',
+				redirect: 'home'
+			},
+			{
+				path: 'home',
+				component: Home
+			},
+			{
+				path: 'category',
+				component: Category
+			},
+			{
+				path: 'product',
+			component: ProductHome
+			},
+		{
+			path: 'product/addupdate',
+			component: ProductAddUpdate
+		},
+		{
+			path: 'product/addupdate/:id',
+			component: ProductAddUpdate
+		},
+		{
+			path: 'product/detail/:id',
+			component: ProductDetail,
+		},
+			{
+				path: 'user',
+				component: User
+			},
+			{
+				path: 'role',
+				component: Role
+			},
+			{
+				path: 'charts/bar',
+				component: Bar
+			},
+			{
+				path: 'charts/line',
+				component: Line
+			},
+			{
+				path: 'charts/pie',
+				component: Pie
+			},
+		{
+			path: '*',
+			component: NotFound
+		}
+		]
+	},
+  
   	
   
 

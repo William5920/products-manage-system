@@ -154,11 +154,11 @@
 			}
 		},
 		mounted() {
-			const user = memoryUtils.user
-			if(!user || !user._id) {
-				this.$router.replace('/login')
-				this.$message.error('请登录！')
-			}
+			// const user = memoryUtils.user
+			// if(!user || !user._id) {
+			// 	this.$router.replace('/login')
+			// 	this.$message.error('请登录！')
+			// }
 
 			this.buildChart()
 		}
