@@ -52,7 +52,7 @@
   		}
   	},
   	created() {
-  		console.log(this.$route.path.split('/')[1]) // 解决在深路径下left-nav不选中的bug
+  		// console.log(this.$route.path.split('/')[1]) // 解决在深路径下left-nav不选中的bug
   	},
     methods: {
       handleOpen(key, keyPath) {
@@ -89,7 +89,7 @@
       		return this.$route.path
 
       	} else {
-      		console.log('/' + this.$route.path.split('/')[1])
+      		// console.log('/' + this.$route.path.split('/')[1])
       		return '/' + this.$route.path.split('/')[1]
       	}
       }

@@ -92,10 +92,10 @@
 	    methods: {
 	    	getCategoryList() { // 获取分类列表
 	    		reqCategoryList().then(res => {
-		    		if(res.status === 0) {
-		    			this.tableData = res.data
-		    			// console.log('获取数据分类成功')
-		    		}
+		    		if(res.meta.status === 200) {
+		    			this.tableData = res.data.list
+		    			// console.log('获取数据分类成功', res)
+					}
 
 		    	}).catch(error => {
 		    		this.$message.error('获取数据失败！')

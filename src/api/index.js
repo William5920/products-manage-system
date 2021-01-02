@@ -8,10 +8,16 @@ import ajax from './ajax'
 import jsonp from 'jsonp'
 import { Message } from 'element-ui'
 
-const BASE_URL = '/api'
 
 // 登录
-export const reqLogin = (username, password) => ajax(BASE_URL + '/login', {username, password}, 'POST')
+export const reqLogin = (username, password) => ajax({
+	method: 'post',
+	url: '/login',
+	data: {
+		username,
+		password
+	}
+})
 
 // 发送jsonp请求获取天气数据
 export const reqWeather = (city) => {
@@ -30,39 +36,69 @@ export const reqWeather = (city) => {
 }
 
 // 获取分类列表
-export const reqCategoryList = () => ajax(BASE_URL + '/manage/category/list')
+export const reqCategoryList = () => ajax({
+	method: 'get',
+	url: '/category/list'
+})
 // 添加分类
-export const reqAddCategory = (categoryName) => ajax(BASE_URL + '/manage/category/add', {categoryName}, 'POST')
+export const reqAddCategory = (categoryName) => ajax('/manage/category/add', {categoryName}, 'POST')
 // 更新分类
-export const reqUpdateCategory = (categoryId, categoryName) => ajax(BASE_URL + '/manage/category/update', {categoryId, categoryName}, 'POST')
+export const reqUpdateCategory = (categoryId, categoryName) => ajax('/manage/category/update', {categoryId, categoryName}, 'POST')
 // 获取商品分页列表
-export const reqProducts = (pageNum, pageSize) => ajax(BASE_URL + '/manage/product/list', {pageNum, pageSize})
+export const reqProducts = () => ajax({
+	method: 'get',
+	url: '/product/list'
+})
 // 获取搜索商品数据
-export const reqSearchProducts = ({pageNum, pageSize, searchType, searchKey}) => ajax(BASE_URL + '/manage/product/search',{pageNum, pageSize,[searchType]:searchKey} )
+export const reqSearchProducts = ({pageNum, pageSize, searchType, searchKey}) => ajax('/manage/product/search',{pageNum, pageSize,[searchType]:searchKey} )
 // 根据商品id获取商品数据
-export const reqProductsById = (productId) => ajax(BASE_URL + '/manage/product/info',{productId})
+export const reqProductsById = (productId) => ajax({
+	method: 'get',
+	url: '/product/info',
+	params: {productId}
+})
 // 根据分类ID获取分类
-export const reqCategoryById = (categoryId) => ajax(BASE_URL + '/manage/category/info', {categoryId})
+export const reqCategoryById = (categoryId) => ajax({
+	method: 'get',
+	url: '/category/info',
+	params: {categoryId}
+})
 // 更新产品上下架的状态
-export const reqUpdateStatus = (productId, status) => ajax(BASE_URL + '/manage/product/updateStatus', {productId, status}, 'POST')
+export const reqUpdateStatus = (productId, status) => ajax('/manage/product/updateStatus', {productId, status}, 'POST')
 // 删除图片
-export const reqDeleteImg = (name) => ajax(BASE_URL + '/manage/img/delete', {name}, 'POST')
-// 添加或更新商品
-export const reqAddOrUpdateProduct = (product) => ajax(BASE_URL + '/manage/product/' + (product._id?'update':'add'), product, 'POST')
+export const reqDeleteImg = (name) => ajax('/manage/img/delete', {name}, 'POST')
+// 添加商品
+export const reqAddProduct = (product) => ajax({
+	method: 'post',
+	url: '/product',
+	data: product
+})
+// 更新商品
+export const reqUpdateProduct = (product) => ajax({
+	method: 'put',
+	url: '/product',
+	data: product
+})
+
+// 删除商品
+export const reqDeleteProduct = (productId) => ajax({
+	method: 'delete',
+	url: `/product/${productId}`
+})
 // 获取角色列表
-export const reqRoleList = () => ajax(BASE_URL + '/manage/role/list')
+export const reqRoleList = () => ajax('/manage/role/list')
 // 添加角色
-export const reqAddRole = (roleName) => ajax(BASE_URL + '/manage/role/add', {roleName}, 'POST')
+export const reqAddRole = (roleName) => ajax('/manage/role/add', {roleName}, 'POST')
 // 设置角色权限
-export const reqUpdateRole = (role) => ajax(BASE_URL + '/manage/role/update', role, 'POST')
+export const reqUpdateRole = (role) => ajax('/manage/role/update', role, 'POST')
 // 获取用户列表
-export const reqUsersList = () => ajax(BASE_URL + '/manage/user/list')
+export const reqUsersList = () => ajax('/manage/user/list')
 // 删除用户
-export const reqDeleteUser = (userId) => ajax(BASE_URL + '/manage/user/delete',{userId}, 'POST' )
+export const reqDeleteUser = (userId) => ajax('/manage/user/delete',{userId}, 'POST' )
 // 添加用户
-export const reqAddUser = (user) => ajax(BASE_URL + '/manage/user/add', user, 'POST')
+export const reqAddUser = (user) => ajax('/manage/user/add', user, 'POST')
 // 更新用户
-export const reqUpdateUser = (user) => ajax(BASE_URL + '/manage/user/update', user, 'POST')
+export const reqUpdateUser = (user) => ajax('/manage/user/update', user, 'POST')
 
 
 

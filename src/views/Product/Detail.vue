@@ -62,11 +62,11 @@
 		},
 		async created() {
 			const result = await reqProductsById(this.id)
-			if(result.status === 0) {
+			if(result.meta.status === 200) {
 				this.product = result.data
 			}
 			const categoryResult = await reqCategoryById(this.product.categoryId)
-			if(categoryResult.status === 0) {
+			if(categoryResult.meta.status === 200) {
 				this.category = categoryResult.data.name
 			}
 		},

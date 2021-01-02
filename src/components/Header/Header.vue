@@ -26,7 +26,7 @@
 			return {
 				currentTime: '', // 当前时间
 				intervalId: null, // 更新时间的定时器id
-				dayPicUrl: '', // 天气图片url
+				dayPicUrl: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1187700675,3361071812&fm=26&gp=0.jpg', // 天气图片url
 				weatherText: '', // 天气文本
 				title: '', // 标题
 				user: memoryUtils.user // 用户信息
@@ -87,7 +87,7 @@
 		created() {
 
 			this.getTime()
-			this.getWeather('北京')
+			// this.getWeather('北京')
 			this.getTitle()
 		},
 		beforeDestroy() {

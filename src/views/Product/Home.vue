@@ -56,11 +56,12 @@
 			    </el-table-column>
 			    <el-table-column
 			      label="操作"
-			      min-width="80"
+			      min-width="120"
 			      align="center">
 			      <template slot-scope="scope">
 			        <el-button @click="showDetail(scope.row)" type="text" size="small">详情</el-button>
 			        <el-button type="text" size="small" @click="updateProduct(scope.row)">修改</el-button>
+					<el-button type="text" size="small" @click="deleteProduct(scope.row._id)">删除</el-button>
 			      </template>
 			    </el-table-column>
 			</el-table>
@@ -78,7 +79,7 @@
 </template>
 
 <script>
-	import {reqProducts, reqSearchProducts, reqUpdateStatus} from '../../api'
+	import {reqProducts, reqSearchProducts, reqUpdateStatus, reqDeleteProduct} from '../../api'
 	export default {
 		data() {
 			return {
@@ -99,11 +100,11 @@
 				if(searchType && searchKey) { // 是否通过搜索获取商品数据
 					result = await reqSearchProducts({pageNum, pageSize, searchType, searchKey})
 				} else {
-					result = await reqProducts(pageNum, pageSize)
+					result = await reqProducts()
 				}
-				
-				if(result.status === 0) {
-					this.total = result.data.total
+				console.log('商品列表', result)
+				if(result.meta.status === 200) {
+					this.total = result.data.list.length
 					this.tableData = result.data.list
 				} else {
 					this.$message.error('获取商品数据失败！')
@@ -155,7 +156,16 @@
 	        // 跳转到修改商品的AddUpdate组件
 	        updateProduct(product) {
 	        	this.$router.push('/product/addUpdate/' + product._id)
-	        }
+			},
+			// 删除商品
+			async deleteProduct(id) {
+				const res = await reqDeleteProduct(id)
+				console.log('删除商品反馈', res)
+				if(res.meta.status === 200) {
+					this.$message.success('删除成功！')
+					this.getProducts(1, this.pageSize)
+				}
+			}
 
 		},
 		created() {

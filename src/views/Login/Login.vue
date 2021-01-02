@@ -57,15 +57,16 @@
 
             const {username, password} = this.ruleForm
             // console.log(username, password)
-            const result = await reqLogin(username, password)
-            if (result.status === 0) {
-              this.$message.success('登录成功！')
+			const result = await reqLogin(username, password)
+			console.log(result)
+            if (result.meta.status === 200) {
+              this.$message.success(result.meta.msg)
               this.$router.replace('/')
-              memoryUtils.user = result.data // 将用户数据保存到内存中去，方便其他组件使用
-              storageUtils.saveUser(result.data) // 将用户数据保存到localStirage中去，以维持登录状态
+              memoryUtils.user = result.data.user // 将用户数据保存到内存中去，方便其他组件使用
+              storageUtils.saveUser(result.data.user) // 将用户数据保存到localStirage中去，以维持登录状态
             } else {
               this.$message({
-                message: '登录失败：' + result.msg
+                message: '登录失败：' + result.meta.msg
               })
             }
 

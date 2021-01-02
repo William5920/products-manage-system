@@ -40,7 +40,7 @@ const routes = [
 			},
 			{
 				path: 'product',
-			component: ProductHome
+				component: ProductHome
 			},
 		{
 			path: 'product/addupdate',

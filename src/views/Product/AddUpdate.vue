@@ -66,7 +66,8 @@
   	reqCategoryList, 
   	reqProductsById, 
   	reqDeleteImg, 
-  	reqAddOrUpdateProduct
+	  reqAddProduct,
+	  reqUpdateProduct
   } from '../../api'
   import RichTextEditor from '../../components/RichTextEditor/RichTextEditor.vue'
   export default {
@@ -119,22 +120,35 @@
       submitForm(formName) { // 提交表单
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            console.log('submit!');
-            console.log(this.ruleForm)
+            // console.log('submit!');
+            // console.log(this.ruleForm)
             const {categoryId,name,desc,price,detail,imgs} = this.ruleForm
             const newProduct = {categoryId,name,desc,price,detail,imgs}
-            console.log(newProduct)
+			
+			let result
+			
+			
             if(this.$route.params.id) {
-            	newProduct._id = this.$route.params.id
-            }
-
-            const result = await reqAddOrUpdateProduct(newProduct)
-            if(result.status === 0) {
+				newProduct._id = this.$route.params.id
+				console.log('更新商品前',newProduct)
+				result = await reqUpdateProduct(newProduct)
+				console.log('更新商品反馈', result)
+            } else {
+				newProduct.categoryId = categoryId[0]
+				console.log('添加商品前',newProduct)
+				result = await reqAddProduct(newProduct)
+				console.log('添加商品反馈', result)
+			}
+			
+			
+            
+            if(result.meta.status === 200) {
             	this.$message.success(`${newProduct._id?'更新':'添加'}商品成功！`)
-            	this.$router.goBack()
+            	this.$router.go(-1)
             } else {
             	this.$message.error(`${newProduct._id?'更新':'添加'}商品失败！`)
-            }
+			}
+			
           } else {
             console.log('error submit!!');
             return false;
@@ -168,7 +182,7 @@
 
       async getProductById(id) { // 封装根据商品ID获取商品的函数
       	const result = await reqProductsById(id)
-			if(result.status === 0) {
+			if(result.meta.status === 200) {
 				this.product = result.data
 			}
 			const {name,categoryId,desc,price,detail} = this.product
@@ -185,9 +199,10 @@
 			
       },
       async getCategoryList() { // 封装获取商品分类列表的函数
-      	const result = await reqCategoryList()
-    	if(result.status === 0) {
-    		this.options = result.data.map(item => ({
+		  const result = await reqCategoryList()
+		  console.log('获取商品分类成功', result)
+    	if(result.meta.status === 200) {
+    		this.options = result.data.list.map(item => ({
     			value: item._id,
     			label: item.name
     		}))
